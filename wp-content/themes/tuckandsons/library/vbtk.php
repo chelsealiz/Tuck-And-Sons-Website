@@ -133,6 +133,8 @@ function vbtk_theme_support() {
 	// default thumb size
 	set_post_thumbnail_size(125, 125, true);
 
+	add_image_size( 'slider-bg-lg', '1400', '505', true );
+	
 	// rss 
 	add_theme_support('automatic-feed-links');
 
