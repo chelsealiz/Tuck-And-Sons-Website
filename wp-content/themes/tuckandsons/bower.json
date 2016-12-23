@@ -1,0 +1,40 @@
+{
+  "name": "VBTK",
+  "homepage": "http://vibethink.com/",
+  "authors": [
+    "VibeThink"
+  ],
+  "description": "Starter theme for VBTK",
+  "keywords": [
+    "wordpress",
+    "foundation"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jqueryui-touch-punch": "*",
+    "slick-carousel": "^1.6.0",
+    "greensock": "~1.16.1",
+    "fastclick": "^1.0.6",
+    "foundation-sites": "^6.2.3",
+    "gsap": "greensock#^1.19.0",
+    "jquery-placeholder": "^2.3.1",
+    "jquery-ui": "^1.12.0",
+    "jquery.cookie": "^1.4.1",
+    "modernizr": "^3.3.1",
+    "motion-ui": "^1.2.2",
+    "lodash": "^4.15.0",
+    "font-awesome": "^4.6.3",
+    "moment": "momentjs#^2.14.1",
+    "handlebars": "^4.0.5"
+  },
+  "resolutions": {
+    "foundation": "~5.5.1"
+  }
+}
