@@ -65,10 +65,12 @@ LINK STYLES
 
 a, a:visited {
 
+	color: $main_grn;
 
 	/*adds highlight on hover */
 	&:hover, &:focus {
 
+		color: $main_grn_hov;
 	}
 
 	/* on click */
@@ -106,6 +108,8 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
 
 h1, .h1 {
 
+	color: $main_grn_hov;
+
 }
 
 h2, .h2 {
@@ -133,15 +137,51 @@ HEADER STYLES
 		list-style: none;
 	}
 }
+
+header.header {
+	position: fixed;
+	width: 100%;
+	transition: background-color 600ms linear;
+	z-index: 8000;
+	height: 45px;
+
+	&.scrolled {
+		background: $main_grn;
+	}
+}
     
 /*********************
 NAVIGATION STYLES
 *********************/
 .top-bar {
+	background-color: $main_grn;
+
+	ul {
+
+		background-color: $main_grn;
+
+	}
+
+	a, a:visited {
+
+		color: $white;
+
+		&:hover, &:focus {
+
+			color: $main_grn_hov;
+		}
+	}
+
 	.title-area {
 		z-index: 1;
 	}
 } 
+
+.menu .active>a {
+
+	background-color: $main_grn;
+
+}
 
 .off-canvas-list {
 	ul {
@@ -156,6 +196,8 @@ NAVIGATION STYLES
 		}
 	}
 }
+
+
 
 /*********************
 POSTS & CONTENT STYLES
