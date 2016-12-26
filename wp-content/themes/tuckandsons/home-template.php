@@ -40,7 +40,9 @@ Template Name: Homepage
 					<?php endif; ?>
 
 					<div class="mid-section">
-						<div class='mid-section-image'>
+
+						<div class="mid-section-image">
+
 							<?php if ( get_field('mid_image') ): ?>
 							
 								<?php 
@@ -52,9 +54,11 @@ Template Name: Homepage
 							
 							<?php endif; ?>
 						</div>
+
 						<div class="mid-section-text">
 							<?php the_field('mid_text'); ?>
 						</div>
+
 					</div>
 
 					<div class="bot-section">

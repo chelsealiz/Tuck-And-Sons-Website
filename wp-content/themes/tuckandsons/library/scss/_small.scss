@@ -755,3 +755,19 @@ PLUGIN STYLES
 	}
 
 }
+
+.mid-section {
+
+	@include grid-row();
+
+	&-image {
+
+		display: none;
+	}
+
+	&-text {
+
+		@include grid-column(12);
+
+	}
+}

@@ -71,3 +71,32 @@ FOUNDATION STYLES
 /*********************
 PLUGIN STYLES
 *********************/
+
+
+
+
+
+
+.mid-section {
+
+	background-color: $main_grn;
+	color: $white;
+	padding: 75px 15px;
+	position: relative;
+
+
+	&-image {
+
+		@include grid-column(4);
+		display: block;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	&-text {
+
+		@include grid-column(8);
+
+	}
+}
