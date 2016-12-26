@@ -720,7 +720,16 @@ PLUGIN STYLES
 
 
 
+.button {
 
+	background-color: $main_grn;
+
+	&:hover {
+		
+		background-color: rgba(30, 57, 42, .85);
+	}
+
+}
 
 
 
@@ -759,6 +768,9 @@ PLUGIN STYLES
 .mid-section {
 
 	@include grid-row();
+	background-color: $main_grn;
+	color: $white;
+	padding: 75px 15px;
 
 	&-image {
 
@@ -770,4 +782,17 @@ PLUGIN STYLES
 		@include grid-column(12);
 
 	}
+}
+
+
+.bot-section {
+
+	@include grid-row();
+	padding: 75px 15px;
+
+	&-info {
+
+		@include grid-column(12);
+	}
+
 }

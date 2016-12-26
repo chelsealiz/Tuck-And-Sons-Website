@@ -62,7 +62,9 @@ Template Name: Homepage
 					</div>
 
 					<div class="bot-section">
-						<?php the_field('contact_form'); ?>
+						<div class="bot-section-info">
+							<?php the_field('contact_form'); ?>
+						</div>
 					</div>
 					
 				<?php endwhile; endif; ?>							
