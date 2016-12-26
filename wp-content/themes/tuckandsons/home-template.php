@@ -8,9 +8,9 @@ Template Name: Homepage
 			
 	<div id="content">
 	
-		<div id="inner-content" class="row">
+		<div id="inner-content" class="">
 	
-		    <main id="main" class="large-12 medium-12 columns" role="main">
+		    <main id="main" class="" role="main">
 				
 				<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
@@ -18,12 +18,23 @@ Template Name: Homepage
 					
 						<?php 
 							$thumb_id = get_field('main_background');
-							$thumb_url_array = wp_get_attachment_image_src($thumb_id, 'full', true);
+							$thumb_url_array = wp_get_attachment_image_src($thumb_id, 'slider_bg-lg', true);
 							$thumb_url = $thumb_url_array[0];
 						?>
-						<div class="" style="background-image: url(<?php echo $thumb_url; ?>);">
-							<h1><?php the_field('main_title'); ?></h1>
-							<div class="text-box"><?php the_field('main_text'); ?></div>
+
+						<div class="top-section" style="background-image: url(<?php echo $thumb_url; ?>);">
+
+							<div class="top-section-inner">
+
+								<h1><?php the_field('main_title'); ?></h1>
+								<div class="text-box-transparent">
+									<div class="text-box">
+									<?php the_field('main_text'); ?>
+									</div>
+								</div>
+
+							</div>
+
 						</div>
 					
 					<?php endif; ?>
