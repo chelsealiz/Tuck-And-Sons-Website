@@ -184,6 +184,23 @@ POSTS & CONTENT STYLES
 }
 
 /*********************
+HOMEPAGE STYLES
+*********************/
+
+.top-home {
+	@include grid-row();
+}
+
+.mid-home {
+	@include grid-row();
+}
+
+.bot-home {
+	@include grid-row();
+}
+
+
+/*********************
 IMAGE GALLERY STYLES
 *********************/
 	.gallery {
