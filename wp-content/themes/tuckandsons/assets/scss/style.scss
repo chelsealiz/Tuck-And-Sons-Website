@@ -30,9 +30,12 @@ CSS file.
 
 // FONTS
 @import "//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700";
+@import "https://fonts.googleapis.com/css?family=Heebo:900";
 
 // Import your custom styles
 @import "main";
+@import "slick";
+@import "pageBuilder";
 
 // Import your retina/HD styles
 @import "2x";

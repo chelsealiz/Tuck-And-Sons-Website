@@ -1,0 +1,19 @@
+.slick-slider {
+	.slick-arrow {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		z-index: 99;
+		font-size: 42px;
+		outline: none;
+		&.slick-prev {
+			left: 15px;
+		}
+		&.slick-next {
+			right: 15px;
+		}
+	}
+	.slick-slide {
+		outline: none;
+	}
+}

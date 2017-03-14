@@ -4,11 +4,11 @@
 	acf.pro = acf.model.extend({
 		
 		actions: {
-			'refresh': 	'refresh',
+			'refresh': 	'refresh'
 		},
 		
 		filters: {
-			'get_fields' : 'get_fields',
+			'get_fields' : 'get_fields'
 		},
 		
 		get_fields: function( $fields ){
@@ -166,8 +166,7 @@
 			$table.find('.acf-row .acf-field.-collapsed-target').removeAttr('colspan');
 			$table.find('.acf-row.-collapsed .acf-field.-collapsed-target').attr('colspan', colspan);
 			
-		},
-		
+		}
 		
 	});
 
@@ -219,8 +218,8 @@
 		
 		initialize: function(){
 			
-			// disable clone inputs
-			this.$clone.find('input, textarea, select').attr('disabled', 'disabled');
+			// disable clone
+			acf.disable_form( this.$clone );
 						
 			
 			// render
@@ -306,8 +305,8 @@
 			$el.removeClass('acf-clone');
 			
 			
-			// enable inputs (ignore inputs disabled for life)
-			$el.find('input, textarea, select').not('.acf-disabled').removeAttr('disabled');
+			// enable 
+			acf.enable_form( $el );
 			
 			
 			// move row
@@ -633,33 +632,66 @@
 			
 		},
 		
-		render_layout: function( $layout ){
+		render_layout_title: function( $layout ){
 			
-			// update order number
+			// vars
+			var ajax_data = acf.serialize( $layout );
 			
 			
+			// append
+			ajax_data = acf.parse_args( ajax_data, {
+				action: 	'acf/fields/flexible_content/layout_title',
+				field_key: 	this.$field.data('key'),
+				i: 			$layout.index(),
+				layout:		$layout.data('layout')
+			});
 			
-			// update text
-/*
-			var data = acf.serialize_form($layout);
 			
-			console.log( data );
-*/
+			// prepare
+			ajax_data = acf.prepare_for_ajax(ajax_data);
 			
+			
+			// ajax get title HTML
+			$.ajax({
+		    	url			: acf.get('ajaxurl'),
+				dataType	: 'html',
+				type		: 'post',
+				data		: ajax_data,
+				success: function( html ){
+					
+					// bail early if no html
+					if( !html ) return;
+					
+					
+					// update html
+					$layout.find('> .acf-fc-layout-handle').html( html );
+					
+				}
+			});
+				
 		},
 			
 		validate_add: function( layout ){
 			
+			// defaults
+			layout = layout || '';
+			
+			
+			// vars
+			var max = this.o.max,
+				count = this.count();
+				
+			
 			// vadiate max
-			if( this.o.max > 0 && this.count() >= this.o.max ) {
+			if( max && count >= max ) {
 				
 				// vars
-				var identifier	= ( this.o.max == 1 ) ? 'layout' : 'layouts',
+				var identifier	= ( max == 1 ) ? 'layout' : 'layouts',
 					s 			= acf._e('flexible_content', 'max');
 				
 				
 				// translate
-				s = s.replace('{max}', this.o.max);
+				s = s.replace('{max}', max);
 				s = s.replace('{identifier}', acf._e('flexible_content', identifier));
 				
 				
@@ -669,35 +701,41 @@
 				
 				// return
 				return false;
+				
 			}
 			
 			
 			// vadiate max layout
-			var $popup			= $( this.$el.children('.tmpl-popup').html() ),
-				$a				= $popup.find('[data-layout="' + layout + '"]'),
-				layout_max		= parseInt( $a.attr('data-max') ),
-				layout_count	= this.$values.children('.layout[data-layout="' + layout + '"]').length;
-			
-			
-			if( layout_max > 0 && layout_count >= layout_max ) {
+			if( layout ) {
 				
 				// vars
-				var identifier	= ( layout_max == 1 ) ? 'layout' : 'layouts',
-					s 			= acf._e('flexible_content', 'max_layout');
+				var $popup			= $( this.$el.children('.tmpl-popup').html() ),
+					$a				= $popup.find('[data-layout="' + layout + '"]'),
+					layout_max		= parseInt( $a.attr('data-max') ),
+					layout_count	= this.$values.children('.layout[data-layout="' + layout + '"]').length;
 				
 				
-				// translate
-				s = s.replace('{max}', layout_count);
-				s = s.replace('{label}', '"' + $a.text() + '"');
-				s = s.replace('{identifier}', acf._e('flexible_content', identifier));
+				if( layout_max > 0 && layout_count >= layout_max ) {
+					
+					// vars
+					var identifier	= ( layout_max == 1 ) ? 'layout' : 'layouts',
+						s 			= acf._e('flexible_content', 'max_layout');
+					
+					
+					// translate
+					s = s.replace('{max}', layout_count);
+					s = s.replace('{label}', '"' + $a.text() + '"');
+					s = s.replace('{identifier}', acf._e('flexible_content', identifier));
+					
+					
+					// alert
+					alert( s );
+					
+					
+					// return
+					return false;
+				}
 				
-				
-				// alert
-				alert( s );
-				
-				
-				// return
-				return false;
 			}
 			
 			
@@ -708,16 +746,25 @@
 		
 		validate_remove: function( layout ){
 			
+			// defaults
+			layout = layout || '';
+			
+			
+			// vars
+			var min = this.o.min,
+				count = this.count();
+				
+				
 			// vadiate min
-			if( this.o.min > 0 && this.count() <= this.o.min ) {
+			if( min > 0 && count <= min ) {
 				
 				// vars
-				var identifier	= ( this.o.min == 1 ) ? 'layout' : 'layouts',
+				var identifier	= ( min == 1 ) ? 'layout' : 'layouts',
 					s 			= acf._e('flexible_content', 'min') + ', ' + acf._e('flexible_content', 'remove');
 				
 				
 				// translate
-				s = s.replace('{min}', this.o.min);
+				s = s.replace('{min}', min);
 				s = s.replace('{identifier}', acf._e('flexible_content', identifier));
 				s = s.replace('{layout}', acf._e('flexible_content', 'layout'));
 				
@@ -728,29 +775,35 @@
 			}
 			
 			
-			// vadiate max layout
-			var $popup			= $( this.$el.children('.tmpl-popup').html() ),
-				$a				= $popup.find('[data-layout="' + layout + '"]'),
-				layout_min		= parseInt( $a.attr('data-min') ),
-				layout_count	= this.$values.children('.layout[data-layout="' + layout + '"]').length;
-			
-			
-			if( layout_min > 0 && layout_count <= layout_min ) {
+			// vadiate min layout
+			if( layout ) {
 				
 				// vars
-				var identifier	= ( layout_min == 1 ) ? 'layout' : 'layouts',
-					s 			= acf._e('flexible_content', 'min_layout') + ', ' + acf._e('flexible_content', 'remove');
+				var $popup			= $( this.$el.children('.tmpl-popup').html() ),
+					$a				= $popup.find('[data-layout="' + layout + '"]'),
+					layout_min		= parseInt( $a.attr('data-min') ),
+					layout_count	= this.$values.children('.layout[data-layout="' + layout + '"]').length;
 				
 				
-				// translate
-				s = s.replace('{min}', layout_count);
-				s = s.replace('{label}', '"' + $a.text() + '"');
-				s = s.replace('{identifier}', acf._e('flexible_content', identifier));
-				s = s.replace('{layout}', acf._e('flexible_content', 'layout'));
+				if( layout_min > 0 && layout_count <= layout_min ) {
+					
+					// vars
+					var identifier	= ( layout_min == 1 ) ? 'layout' : 'layouts',
+						s 			= acf._e('flexible_content', 'min_layout') + ', ' + acf._e('flexible_content', 'remove');
+					
+					
+					// translate
+					s = s.replace('{min}', layout_count);
+					s = s.replace('{label}', '"' + $a.text() + '"');
+					s = s.replace('{identifier}', acf._e('flexible_content', identifier));
+					s = s.replace('{layout}', acf._e('flexible_content', 'layout'));
+					
+					
+					// return
+					return confirm( s );
+					
+				}
 				
-				
-				// return
-				return confirm( s );
 			}
 			
 			
@@ -906,6 +959,10 @@
 		
 		_open: function( e ){ //console.log('_open');
 			
+			// bail early if validation fails
+			if( !this.validate_add() ) return false;
+			
+			
 			// reference
 			var $values = this.$values;
 			
@@ -918,44 +975,24 @@
 			$popup.find('a').each(function(){
 				
 				// vars
-				var min		= parseInt( $(this).attr('data-min') ),
-					max		= parseInt( $(this).attr('data-max') ),
-					name	= $(this).attr('data-layout'),
-					label	= $(this).text(),
-					count	= $values.children('.layout[data-layout="' + name + '"]').length,
-					$status = $(this).children('.status');
+				var $a = $(this),
+					min = $a.data('min') || 0,
+					max = $a.data('max') || 0,
+					name = $a.data('layout'),
+					count = $values.children('.layout[data-layout="' + name + '"]').length;
 				
 				
-				if( max > 0 ) {
+				// max
+				if( max && count >= max) {
 					
-					// find diff
-					var available	= max - count,
-						s			= acf._e('flexible_content', 'available'),
-						identifier	= ( available == 1 ) ? 'layout' : 'layouts',
-				
-					
-					// translate
-					s = s.replace('{available}', available);
-					s = s.replace('{max}', max);
-					s = s.replace('{label}', '"' + label + '"');
-					s = s.replace('{identifier}', acf._e('flexible_content', identifier));
-					
-					
-					// show status
-					$status.show().text( available ).attr('title', s);
-					
-					
-					// limit reached?
-					if( available == 0 ) {
-					
-						$status.addClass('warning');
-						
-					}
+					$a.addClass('disabled');
+					return;
 					
 				}
 				
 				
-				if( min > 0 ) {
+				// min
+				if( min ) {
 					
 					// find diff
 					var required	= min - count,
@@ -966,14 +1003,15 @@
 					// translate
 					s = s.replace('{required}', required);
 					s = s.replace('{min}', min);
-					s = s.replace('{label}', '"' + label + '"');
+					s = s.replace('{label} ', ''); // remove label since 5.5.0
 					s = s.replace('{identifier}', acf._e('flexible_content', identifier));
 					
 					
 					// limit reached?
 					if( required > 0 ) {
-					
-						$status.addClass('warning').show().text( required ).attr('title', s);
+						
+						var $badge = $('<span class="badge"></span>').attr('title', s).text(required);
+						$a.append( $badge );
 						
 					}
 					
@@ -996,21 +1034,23 @@
 			
 			// vars
 			$popup.css({
-				'margin-top' : 0 - $popup.height() - e.$el.outerHeight() - 14,
-				'margin-left' : ( e.$el.outerWidth() - $popup.width() ) / 2,
+				'margin-top' : 0 - $popup.height() - e.$el.outerHeight() - 15,
+				'margin-left' : ( e.$el.outerWidth() - $popup.width() ) / 2
 			});
 			
 			
 			// check distance to top
-			var offset = $popup.offset().top;
+			var dist_to_top = $popup.offset().top,
+				min = ($('#wpadminbar').height() || 0) + 30; // 30px buffer below 'top'
 			
-			if( offset < 30 ) {
+			if( dist_to_top < min ) {
 				
 				$popup.css({
 					'margin-top' : 15
 				});
 				
-				$popup.find('.bit').addClass('top');
+				$popup.addClass('bottom');
+				
 			}
 			
 			
@@ -1120,60 +1160,26 @@
 		_collapse: function( e ){ //console.log('_collapse');
 			
 			// vars
-			var $layout	= e.$el.closest('.layout');
+			var $layout	= e.$el.closest('.layout'),
+				collapsed = $layout.hasClass('-collapsed'),
+				action = collapsed ? 'show' : 'hide';
 			
 			
-			// open
-			if( $layout.hasClass('-collapsed') ) {
+			// render
+			// - do this before calling actions to avoif focusing on the wrong field
+			this.render_layout_title( $layout );
 			
-				$layout.removeClass('-collapsed');
-				
-				acf.do_action('refresh', $layout);
 			
-			// close
-			} else {
-				
-				$layout.addClass('-collapsed');
-				
-			}
+			// toggle class
+			$layout.toggleClass('-collapsed');
 			
 			
 			// sync collapsed order
 			this.sync();
 			
 			
-			// vars
-			var data = acf.serialize( $layout );
-			
-			
-			// append
-			$.extend(data, {
-				action: 	'acf/fields/flexible_content/layout_title',
-				field_key: 	this.$field.data('key'),
-				post_id: 	acf.get('post_id'),
-				i: 			$layout.index(),
-				layout:		$layout.data('layout'),
-			});
-			
-			
-			// ajax get title HTML
-			$.ajax({
-		    	url			: acf.get('ajaxurl'),
-				dataType	: 'html',
-				type		: 'post',
-				data		: data,
-				success: function( html ){
-					
-					// bail early if no html
-					if( !html ) return;
-					
-					
-					// update html
-					$layout.find('> .acf-fc-layout-handle').html( html );
-					
-				}
-			});
-
+			// action
+			acf.do_action(action, $layout, 'collapse');
 			
 		}
 		
@@ -1197,7 +1203,6 @@
 		actions: {
 			'ready':	'initialize',
 			'append':	'initialize',
-			'submit':	'close_sidebar',
 			'show': 	'resize'
 		},
 		
@@ -1860,6 +1865,10 @@
 			if( $attachment.hasClass('active') ) return;
 			
 			
+			// save any changes in sidebar
+			this.$side.find(':focus').trigger('blur');
+			
+			
 			// clear selection
 			this.get_attachment('active').removeClass('active');
 			
@@ -1955,8 +1964,6 @@
 			var data = acf.prepare_for_ajax({
 				action		: 'acf/fields/gallery/get_attachment',
 				field_key	: this.$field.data('key'),
-				nonce		: acf.get('nonce'),
-				post_id		: acf.get('post_id'),
 				id			: id
 			});
 			
@@ -2066,7 +2073,6 @@
 			var data = acf.prepare_for_ajax({
 				action		: 'acf/fields/gallery/get_sort_order',
 				field_key	: this.$field.data('key'),
-				post_id		: acf.get('post_id'),
 				ids			: [],
 				sort		: sort
 			});
@@ -2356,6 +2362,52 @@
 		}
 		
 	});
+	
+	
+	/*
+	*  acf_gallery_manager
+	*
+	*  Priveds some global functionality for the gallery field
+	*
+	*  @type	function
+	*  @date	25/11/2015
+	*  @since	5.3.2
+	*
+	*  @param	n/a
+	*  @return	n/a
+	*/
+	
+	var acf_gallery_manager = acf.model.extend({
+		
+		actions: {
+			'validation_begin': 	'validation_begin',
+			'validation_failure': 	'validation_failure'
+		},
+		
+		validation_begin: function(){
+			
+			// lock all gallery forms
+			$('.acf-gallery-side-data').each(function(){
+				
+				acf.disable_form( $(this), 'gallery' );
+				
+			});
+			
+		},
+		
+		validation_failure: function(){
+			
+			// lock all gallery forms
+			$('.acf-gallery-side-data').each(function(){
+				
+				acf.enable_form( $(this), 'gallery' );
+				
+			});
+			
+		}
+		
+	});
+	
 	
 })(jQuery);
 

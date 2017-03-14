@@ -87,6 +87,3 @@ if ( !defined('ABSPATH') )
 
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
-
-// DISABLE PLUGIN / THEME UPDATES ON PRODUCTION ENVIRONMENTS
-// define( 'DISALLOW_FILE_MODS', true );

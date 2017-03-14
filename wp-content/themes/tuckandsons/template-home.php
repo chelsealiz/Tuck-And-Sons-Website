@@ -27,6 +27,23 @@ Template Name: Homepage
 		   		<?php the_field('main_text'); ?>
 		   	
 		   </div>
+
+		   <div class="mid-home">
+		   	<?php if ( get_field('mid_image') ): ?>
+		   	
+		   		<?php 
+		   			$thumb_id = get_field('mid_image');
+		   			$thumb_url_array = wp_get_attachment_image_src($thumb_id, 'full', true);
+		   			$thumb_url = $thumb_url_array[0];
+		   		?>
+		   		<img class="hero-logo" src="<?php echo $thumb_url; ?>" alt="<?php the_title(); ?>" />
+		   		<?php the_field('mid_text'); ?>
+		   	<?php endif; ?>
+		   </div>
+
+		   <div class="bot-home">
+		   		<?php the_field('contact_form'); ?>
+		   </div>
 		    
 		</div> <!-- end #inner-content -->
 	

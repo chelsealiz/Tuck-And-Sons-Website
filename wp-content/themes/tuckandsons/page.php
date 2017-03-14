@@ -1,23 +1,21 @@
 <?php get_header(); ?>
 	
-	<div id="content">
-	
-		<div id="inner-content" class="row">
-	
-		    <main id="main" class="large-8 medium-8 columns" role="main">
-				
-				<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-			    	<?php get_template_part( 'parts/loop', 'page' ); ?>
-			    
-			    <?php endwhile; endif; ?>							
-			    					
-			</main> <!-- end #main -->
+    	<?php if(get_field('page_builder')): ?>
+		
+			<?php get_template_part('page-builder/loop','page_builder'); ?>
+		
+		<?php else: ?>
 
-		    <?php get_sidebar(); ?>
-		    
-		</div> <!-- end #inner-content -->
+			<div class="row">
+				<div class="columns small-12">
+					<?php the_content(); ?>
+				</div>
+			</div>
 
-	</div> <!-- end #content -->
+		<?php endif; ?>
+    
+    <?php endwhile; endif; ?>							
 
 <?php get_footer(); ?>

@@ -2,6 +2,10 @@
 
 Based on http://jointswp.com/
 
+
+UPDATE 2/20/17: ACF is now being saved into files in the theme and we have disabled the ability to modify Custom Fields unless a constant is set in the config file. To allow this, add `define('WP_LOCAL',true);` to your local wp-config.php
+
+
 ## Installation:
 #### Step 1
 _(This step is global, once you have this done you can skip this step.)_ 

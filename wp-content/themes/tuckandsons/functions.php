@@ -45,6 +45,24 @@ require_once(get_template_directory().'/assets/translation/translation.php');
 
 // require_once(get_template_directory().'/assets/functions/vbtk.php'); 
 
+
+
+// HIDE CUSTOM FIELDS WHEN CONSTANT IS NOT SET OR IS FALSE
+if(!defined('WP_LOCAL') || !WP_LOCAL){
+    add_filter('acf/settings/show_admin', '__return_false');
+}
+// SAVE ACF TO FILES
+add_filter('acf/settings/save_json', function() {
+    return get_stylesheet_directory() . '/custom-acf-json';
+});
+add_filter('acf/settings/load_json', function($paths) {
+    $paths[] = get_stylesheet_directory() . '/custom-acf-json';
+    return $paths;
+});
+
+
+
+
 require_once(get_template_directory().'/assets/functions/Mobile_Detect.php'); 
 function body_class_device_detect( $classes ) {
 	$detect = new Mobile_Detect;
@@ -70,4 +88,37 @@ if( function_exists('acf_add_options_page') ) {
 		'capability'	=> 'edit_posts',
 		'redirect'		=> false
 	));
+}
+
+
+function display_acf_button_object($button, $link_text = null) {
+    $url = '#';
+    $target = '';
+
+    if(is_null($link_text) && isset($button['link_text']) && !empty($button['link_text'])) {
+        $link_text = $button['link_text'];
+    } else if(is_null($link_text)) {
+        $link_text = "Learn More";
+    }
+
+    $class = isset($button['button_style']) ? $button['button_style'] : 'primary';
+    switch($button['button_type']){
+        case 'internal':
+            $url = $button['button_post'];
+            break;
+        case 'email':
+            $url = 'mailto:'.$button['email_address'];
+            break;
+        case 'external':
+            $url = $button['external_url'];
+            $target = 'target="_blank"';
+            break;
+        case 'file':
+            $url = $button['file_download'];
+            $target = 'target="_blank"';
+            break;
+    }
+?>
+    <a href="<?php echo $url; ?>" <?php echo $target; ?> class="button <?php echo $class; ?>"><?php echo $link_text; ?></a>
+<?php
 }
