@@ -6,7 +6,7 @@ var proxy_url = 'starter.dev'; // REPLACE THIS WITH YOUR LOCAL DEV URL
 var bower_files = [
   './bower_components/jquery/dist/jquery.js',
   './bower_components/fastclick/lib/fastclick.js',
-  './bower_components/foundation-sites/dist/foundation.js',   
+  './bower_components/foundation-sites/dist/js/foundation.js',   
   './bower_components/motion-ui/dist/motion-ui.js',
   './bower_components/slick-carousel/slick/slick.js',
   './bower_components/handlebars/handlebars.js',
@@ -20,7 +20,7 @@ var fonts = [
   './bower_components/font-awesome/fonts/*',
 ];
 
-var proxy_url = 'tuckandsons.dev';
+
 /* ----------------------------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------- */
@@ -48,7 +48,7 @@ var gulp = require('gulp'),
  
 // COMPILE THEME SASS FILE
 gulp.task('sass', function () {
-  return gulp.src('./library/scss/style.scss')
+  return gulp.src('./assets/scss/style.scss')
     .pipe(sourcemaps.init()) // Start Sourcemaps
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
@@ -80,7 +80,7 @@ gulp.task('bower', function() {
 
 // MINIFY THEME JS FILE
 gulp.task('script', function() {
-  return gulp.src('./library/js/scripts.js')
+  return gulp.src('./assets/js/scripts.js')
     .pipe(sourcemaps.init())
     // .pipe(browserify({
     //   insertGlobals : true,
@@ -100,13 +100,13 @@ gulp.task('watch', function () {
     './build/css/*.css', 
     './build/js/scripts.js',
     '**/*.php',
-    './library/images/**/*.{png,jpg,gif,svg,webp}',
+    './assets/images/**/*.{png,jpg,gif,svg,webp}',
   ];
 
-	browserSync.init(files, { proxy: proxy_url });
+  browserSync.init(files, { proxy: proxy_url });
 
-	gulp.watch('./library/scss/**/*.scss', ['sass']);
-	gulp.watch('./library/js/scripts.js', ['script']);
+  gulp.watch('./assets/scss/**/*.scss', ['sass']);
+  gulp.watch('./assets/js/scripts.js', ['script']);
 });
 
 gulp.task('dev', ['bower','fonts','script','sass','watch']);

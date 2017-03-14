@@ -22,7 +22,7 @@
     "slick-carousel": "^1.6.0",
     "greensock": "~1.16.1",
     "fastclick": "^1.0.6",
-    "foundation-sites": "6.2.4",
+    "foundation-sites": "^6.3.0",
     "gsap": "greensock#^1.19.0",
     "jquery-placeholder": "^2.3.1",
     "jquery-ui": "^1.12.0",
