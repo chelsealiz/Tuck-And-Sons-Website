@@ -47,8 +47,9 @@ Template Name: Homepage
 		   			<?php if( have_rows('tri_section') ): ?>
 		   				<?php while ( have_rows('tri_section') ) : the_row(); ?>
 		   					<div class="value">
+		   					<i class="fa <?php the_sub_field('icon'); ?>" aria-hidden="true"></i>
 		   						<h3><?php the_sub_field('title'); ?></h3>
-		   						<i class="fa <?php the_sub_field('icon'); ?>" aria-hidden="true"></i>
+		   						
 		   						<p><?php the_sub_field('content'); ?></p>
 		   					</div>
 		   				<?php endwhile; ?>
@@ -61,7 +62,11 @@ Template Name: Homepage
 		   </div>
 
 		   <div class="bot-home">
-		   		<?php the_field('form_area'); ?>
+			   	<div class="bot-row">
+			   		<div class="bot-col">
+			   			<?php the_field('form_area'); ?>
+			   		</div>
+			   	</div>
 		   </div>
 		    
 		</div> <!-- end #inner-content -->

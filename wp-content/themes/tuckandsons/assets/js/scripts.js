@@ -4,15 +4,19 @@ jQuery(document).ready(function($) {
 
   $('.services-slider').slick({
     dots: true,
-    arrows: true,
+    arrows: false,
+    autoplay: true,
     responsive: [
-      {
-        breakpoint: 480,
-        settings: {
-          arrows: false,
-        }
+    {
+      breakpoint: 480,
+      settings: {
+        autoplay: false,
       }
-    ]
+    }
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
   });
 
 

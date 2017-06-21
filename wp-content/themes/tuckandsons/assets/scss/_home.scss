@@ -6,24 +6,36 @@
 		text-align: center;
 
 		@include breakpoint(medium up){
-			height: 85vh;
+			height: 65vh;
 		}
 
 		.page-title {
 			position: absolute;
 			top: 50%;
-			right: 50%;
-			transform: translate(50%, -50%);
+			left: 50%;
+			transform: translate(-50%, -50%);
 			color: $white;
 			line-height: 60px;
+
+			@include breakpoint(medium up){
+				left: 0;
+				top: 67%;
+				transform: translateY(-50%);
+				max-width: 50%;
+				font-size: 55px;
+			}
 		}
 	}
 
 	.services-home {
 		padding: 40px 20px;
 
+		@include breakpoint(medium up){
+			padding: 55px 60px;
+		}
+
 		h2 {
-			color: $main-green;
+			color: $black;
 			text-align: center;
 			padding-bottom: 30px;
 		}
@@ -53,27 +65,45 @@
 		background-color: $accent-brown;
 		text-align: center;
 
+		@include breakpoint(medium up){
+			padding: 55px 60px;
+		}
+
 		h2 {
-			color: $white;
+			color: $main-green;
 			padding-bottom: 30px;
+
+			@include breakpoint(medium up){
+				padding-bottom: 50px;
+			}
 		}
 
 		.values-row {
 			@include grid-row();
 			.value {
 				@include grid-column(12);
-				color: $white;
 				padding-bottom: 30px;
+
+				@include breakpoint(medium up){
+					@include grid-column(4);
+				}
 
 				h3 {
 					padding-bottom: 15px;
 					font-size: 30px;
+					color: $main-green;
+					font-weight: bold;
+					text-transform: uppercase;
+
+					@include breakpoint(medium up){
+						font-size: 23px;
+					}
+					
 				}
 
 				i {
-					color: $main-green;
 					padding-bottom: 30px;
-					font-size: 45px;
+					font-size: 60px;	
 				}
 
 				p {
@@ -86,10 +116,28 @@
 	.bot-home {
 		padding: 40px 20px;
 
+		@include breakpoint(medium up){
+			padding: 55px 60px;
+		}
+
+		.bot-row {
+			@include grid-row();
+
+			.bot-col {
+				@include grid-column(12);
+
+				@include breakpoint(medium up){
+					@include grid-column(8);
+					@include grid-column-offset(2);
+				}
+			}
+		}
+
 		.gform_wrapper .gsection .gfield_label, .gform_wrapper h2.gsection_title, .gform_wrapper h3.gform_title {
-			font-size: 25px;
+			font-size: 35px;
 			text-align: center;
 			letter-spacing: 2px!important;
+			font-weight: 500;
 		}
 
 		.gform_wrapper .top_label .gfield_label {
@@ -107,6 +155,10 @@
 			&:hover {
 				background-color: $hov-green;
 			}
+		}
+
+		.gform_wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]){
+			width: 100%;
 		}
 
 	}
@@ -137,6 +189,14 @@
 
 			&:focus {
 				outline: none;
+			}
+		}
+
+		&.slick-active {
+			button {
+				background-color: $main-green;
+				color: $main-green;
+
 			}
 		}
 	}

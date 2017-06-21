@@ -33,6 +33,13 @@
 						color: $accent-brown;
 					}
 				}
+
+				&.active {
+					a {
+						color: $white;
+						background-color: transparent;
+					}
+				}
 			}
 		}
 	}
