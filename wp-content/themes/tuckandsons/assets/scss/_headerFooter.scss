@@ -1,0 +1,40 @@
+.top-bar {
+	box-shadow: 1px -3px 18px $lt-grey;
+	z-index: 3;
+
+	&-left {
+		display: inline-block;
+		max-width: 50%;
+		.menu {
+
+			li {
+				a {
+					color: $white;
+
+					&:hover{
+						color: $accent-brown;
+					}
+				}
+			}
+		}
+	}
+
+	&-right {
+		display: inline-block;
+		max-width: 50%;
+		.menu {
+			
+			li {
+				text-align: right;
+				a {
+					color: $white;
+
+					&:hover{
+						color: $accent-brown;
+					}
+				}
+			}
+		}
+	}
+
+}
