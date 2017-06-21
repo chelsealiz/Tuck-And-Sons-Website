@@ -12,7 +12,11 @@ GENERAL STYLES
 LINK STYLES
 *********************/
 a, a:visited {
+	color: $main-green;
 
+	&:hover {
+		color: $hov-green;
+	}
 	// Mobile tap color
 	&:link {
 		//Highlight links on iOS, Similar to :hover for mobile devices.
@@ -25,7 +29,7 @@ H1, H2, H3, H4, H5 P STYLES
 *********************/
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
 	font-family: $header-font-family;
-	letter-spacing: 3px;
+	letter-spacing: 2px;
 
 	// Removing text decoration from all headline links
 	a {
@@ -35,14 +39,15 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
 
 h1, .h1 {
 	font-size: 64px;
+	letter-spacing: 3px;
 }
 
 h2, .h2 {
-
+	font-size: 36px;
 }
 
 h3, .h3 {
-
+	font-size: 25px;
 }
 
 h4, .h4 {

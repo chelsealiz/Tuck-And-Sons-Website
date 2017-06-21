@@ -1,0 +1,143 @@
+#inner-content {
+
+	.top-home {
+		height: 90vh;
+		position: relative;
+		text-align: center;
+
+		@include breakpoint(medium up){
+			height: 85vh;
+		}
+
+		.page-title {
+			position: absolute;
+			top: 50%;
+			right: 50%;
+			transform: translate(50%, -50%);
+			color: $white;
+			line-height: 60px;
+		}
+	}
+
+	.services-home {
+		padding: 40px 20px;
+
+		h2 {
+			color: $main-green;
+			text-align: center;
+			padding-bottom: 30px;
+		}
+
+		.services-slider {
+			.service {
+				&-title {
+					padding-bottom: 5px;
+					margin-bottom: 20px;
+					border-bottom: 1px solid $black;
+					padding-left: 5px;
+					i {
+						padding-right: 10px;
+					}
+				}
+
+				&-content {
+					padding-left: 5px;
+
+				}
+			}
+		}
+	}
+
+	.values-home {
+		padding: 40px 20px;
+		background-color: $accent-brown;
+		text-align: center;
+
+		h2 {
+			color: $white;
+			padding-bottom: 30px;
+		}
+
+		.values-row {
+			@include grid-row();
+			.value {
+				@include grid-column(12);
+				color: $white;
+				padding-bottom: 30px;
+
+				h3 {
+					padding-bottom: 15px;
+					font-size: 30px;
+				}
+
+				i {
+					color: $main-green;
+					padding-bottom: 30px;
+					font-size: 45px;
+				}
+
+				p {
+					padding-bottom: 20px;
+				}
+			}
+		}
+	}
+
+	.bot-home {
+		padding: 40px 20px;
+
+		.gform_wrapper .gsection .gfield_label, .gform_wrapper h2.gsection_title, .gform_wrapper h3.gform_title {
+			font-size: 25px;
+			text-align: center;
+			letter-spacing: 2px!important;
+		}
+
+		.gform_wrapper .top_label .gfield_label {
+			font-size: 15px;
+			letter-spacing: 2px;
+		}
+
+		.gform_wrapper .gform_footer input.button, .gform_wrapper .gform_footer input[type=submit], .gform_wrapper .gform_page_footer input.button, .gform_wrapper .gform_page_footer input[type=submit] {
+			font-size: 20px;
+			background-color: $main-green;
+			letter-spacing: 2px;
+			font-family: $header-font-family;
+			text-transform: uppercase;
+
+			&:hover {
+				background-color: $hov-green;
+			}
+		}
+
+	}
+}
+
+.slick-dots {
+	margin-left: 0px;
+	text-align: center;
+
+	li {
+		display: inline-block;
+
+		button {
+			content: ' ';
+			height: 20px;
+			width: 20px;
+			border-radius: 12px;
+			background-color: #ececec;
+			//border: 2px solid #bdbdbd;
+			margin-left: 5px;
+			margin-right: 5px;
+			color: #ececec;
+
+			&:hover {
+				background-color: $main-green;
+				color: $main-green;
+			}
+
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+}

@@ -2,6 +2,19 @@ jQuery(document).ready(function($) {
 
   $(document).foundation();
 
+  $('.services-slider').slick({
+    dots: true,
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: false,
+        }
+      }
+    ]
+  });
+
 
   
   $('.pb-gallery-wrapper').slick({
