@@ -531,8 +531,46 @@ FOOTER STYLES
 }
 	
 /*********************
-FOUNDATION STYLES
+DEFAULT PAGE STYLES
 *********************/
+
+#inner-content {
+	.top-header {
+		height: 35vh;position: relative;
+		text-align: center;
+
+		@include breakpoint(medium up){
+			height: 50vh;
+		}
+
+		h1 {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			color: $white;
+			line-height: 60px;
+		}
+	}
+
+	.main-content-wrap {
+		padding: 40px 20px;
+		@include grid-row();
+
+		@include breakpoint(medium up){
+			padding: 55px 60px;
+		}
+
+		.main-content {
+			@include grid-column(12);
+
+			@include breakpoint(medium up){
+				@include grid-column(8);
+				@include grid-column-offset(2);
+			}
+		}
+	}
+}
 
 /*********************
 PLUGIN STYLES
@@ -541,4 +579,32 @@ PLUGIN STYLES
 .gform_body ul {
     list-style: none outside none;
     margin: 0;
+}
+
+.gform_wrapper .gsection .gfield_label, .gform_wrapper h2.gsection_title, .gform_wrapper h3.gform_title {
+	font-size: 35px;
+	text-align: center;
+	letter-spacing: 2px!important;
+	font-weight: 500;
+}
+
+.gform_wrapper .top_label .gfield_label {
+	font-size: 15px;
+	letter-spacing: 2px;
+}
+
+.gform_wrapper .gform_footer input.button, .gform_wrapper .gform_footer input[type=submit], .gform_wrapper .gform_page_footer input.button, .gform_wrapper .gform_page_footer input[type=submit] {
+	font-size: 20px;
+	background-color: $main-green;
+	letter-spacing: 2px;
+	font-family: $header-font-family;
+	text-transform: uppercase;
+
+	&:hover {
+		background-color: $hov-green;
+	}
+}
+
+.gform_wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]){
+	width: 100%;
 }
